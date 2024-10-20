@@ -5,6 +5,7 @@ import { RootCss } from '../../../ui/RootCss'
 const FilledButton = ({
     title,
     onClick,
+    disabled
     // size,
     // backgroundColor,
     // backgroundCOlorHoever
@@ -30,6 +31,7 @@ const FilledButton = ({
                     backgroundColor: `${RootCss.colors.primaryColorHover}`,
                 }
             }}
+            disabled={disabled}
         >
             {title}
         </Button>

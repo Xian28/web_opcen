@@ -15,8 +15,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { IP } from '../../ip/IP'
 import { API } from '../../functions/API'
+import Loader from '../../components/Loader/Loader'
 
 const LandingPage = () => {
+    // visibility state of loading pop up
+    const [visibility, setVisibility] = useState(false)
+
+    // login button disable status
+    const [loginButtonDisabled, setLoginButtonDisabled] = useState(false)
 
     // inputs error handling
     // inputs error handling
@@ -44,6 +50,9 @@ const LandingPage = () => {
     }
 
     const login = () => {
+        if(loginButtonDisabled === true){
+            return //this will end this function
+        }
 
         // most top input with invalid value
         var mostTopInvalidInput = '';
@@ -89,7 +98,8 @@ const LandingPage = () => {
 
         // all inputs are valid and will now submit data
         if(invalidInputCounter == 0){
-            // alert('will now check database')
+            setLoginButtonDisabled(true)
+            setVisibility(true)
             var userJSON = {
                 username: usernameInput,
                 password: passwordInput
@@ -108,14 +118,23 @@ const LandingPage = () => {
                 const user = users.find(u => u.username === userJSON.username && u.password === userJSON.password)
 
                 if(user){
-                    alert('Welcome ' + user.firstName + ' ' + user.middleName.charAt(0) + '. ' + user.lastName)
+                    setTimeout(() => {
+                        alert('Welcome ' + user.firstName + ' ' + user.middleName.charAt(0) + '. ' + user.lastName)
+                        setLoginButtonDisabled(false)
+                        setVisibility(false)
+                    }, 1500);
                 }
                 else{
-                    alert('Oops. Username and password do not matched. Please try again.')
+                    setTimeout(() => {
+                        alert('Oops. Username and password do not matched. Please try again.')
+                        setLoginButtonDisabled(false)
+                        setVisibility(false)
+                    }, 1500);
                 }
             })
             .catch(error => {
                 alert('Sorry, a problem has occured while logging in. Error Code: A0001')
+                setLoginButtonDisabled(false)
             })
         }
     }
@@ -231,10 +250,12 @@ const LandingPage = () => {
                             />
                             <Box sx={LandingPageCss.loginButtonContainer}>
                                 <FilledButton
+                                    id='test'
                                     title={'LOGIN'}
                                     onClick = {() => {
                                         login()
                                     }}
+                                    disabled={loginButtonDisabled}
                                 />
                             </Box>
                         </Box>
@@ -261,6 +282,11 @@ const LandingPage = () => {
                     </Box>
                 </Box>    
             </Box>
+            {
+                visibility ? (
+                    <Loader/>
+                ) : null
+            }
         </Box>
     )
 }
