@@ -16,8 +16,24 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { IP } from '../../ip/IP'
 import { API } from '../../functions/API'
 import Loader from '../../components/Loader/Loader'
+import BasicSnackbar from '../../components/BasicSnackbar/BasicSnackbar'
+import { useNavigate } from 'react-router-dom'
 
 const LandingPage = () => {
+    // snackbar components
+    const [openSnackBar, setOpenSnackBar] = useState(false)
+    const [severity, setSeverity] = useState('')
+    const [snackbarMessage, setSnackbarMessage] = useState('')
+    const handleCloseSnackbar = (event, reason) => {
+        if(reason === 'clickaway'){
+            return
+        }
+        setOpenSnackBar(false)
+    }
+
+    // for routing
+    const navigate = useNavigate()
+
     // visibility state of loading pop up
     const [visibility, setVisibility] = useState(false)
 
@@ -50,7 +66,7 @@ const LandingPage = () => {
     }
 
     const login = () => {
-        if(loginButtonDisabled === true){
+        if(loginButtonDisabled){
             return //this will end this function
         }
 
@@ -119,22 +135,33 @@ const LandingPage = () => {
 
                 if(user){
                     setTimeout(() => {
-                        alert('Welcome ' + user.firstName + ' ' + user.middleName.charAt(0) + '. ' + user.lastName)
+                        setOpenSnackBar(true)
+                        setSeverity('success')
+                        setSnackbarMessage('Welcome ' + user.firstName + ' ' + user.middleName.charAt(0) + '. ' + user.lastName)
+                        navigate('home')
                         setLoginButtonDisabled(false)
                         setVisibility(false)
+                        // alert('Welcome ' + user.firstName + ' ' + user.middleName.charAt(0) + '. ' + user.lastName)
                     }, 1500);
                 }
                 else{
                     setTimeout(() => {
-                        alert('Oops. Username and password do not matched. Please try again.')
+                        // alert('Oops. Username and password do not matched. Please try again.')
+                        setOpenSnackBar(true)
+                        setSeverity('error')
+                        setSnackbarMessage('Oops. Username and password do not matched. Please try again.')
                         setLoginButtonDisabled(false)
                         setVisibility(false)
                     }, 1500);
                 }
             })
             .catch(error => {
-                alert('Sorry, a problem has occured while logging in. Error Code: A0001')
+                // alert('Sorry, a problem has occured while logging in. Error Code: A0001')
+                setOpenSnackBar(true)
+                setSeverity('error')
+                setSnackbarMessage('Sorry, a problem has occured while logging in. Error Code: A0001')
                 setLoginButtonDisabled(false)
+                setVisibility(false)
             })
         }
     }
@@ -185,7 +212,7 @@ const LandingPage = () => {
                                         </InputAdornment>
                                     ),
                                     inputProps: {
-                                        maxLength: 10,
+                                        maxLength: 50,
                                         style: { 
                                             fontSize: '16px',
                                         }
@@ -238,7 +265,7 @@ const LandingPage = () => {
                                         </InputAdornment>
                                     ),
                                     inputProps: {
-                                        maxLength: 10,
+                                        maxLength: 50,
                                         style: { 
                                             fontSize: '16px',
                                         }
@@ -272,7 +299,7 @@ const LandingPage = () => {
             <Box sx={LandingPageCss.footerContainer}>
                 <Box sx={LandingPageCss.footer}>
                     <Box sx={LandingPageCss.footerCopyright}>
-                        &copy; 2024 Office of Civil Defense RO1 . All Rights Reserved
+                        &copy; {new Date().getFullYear()} Office of Civil Defense RO1 . All Rights Reserved
                     </Box>
                     <Box sx={LandingPageCss.footerSlogan}>
                         SERVING THE NATION. PROTECTING THE PEOPLE
@@ -282,6 +309,12 @@ const LandingPage = () => {
                     </Box>
                 </Box>    
             </Box>
+            <BasicSnackbar
+                open={openSnackBar}
+                severity={severity}
+                message={snackbarMessage}
+                onClose={handleCloseSnackbar}
+            />
             {
                 visibility ? (
                     <Loader/>
