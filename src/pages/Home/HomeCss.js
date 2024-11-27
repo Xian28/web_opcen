@@ -77,7 +77,7 @@ export const HomeCss = {
         display: 'flex',
         flexDirection: 'column',
         width: '250px',
-        padding: '0px 20px',
+        padding: '8px 20px',
         background: `${RootCss.colors.primaryColor}`,
         transition: '0.3s',
     },
@@ -93,5 +93,12 @@ export const HomeCss = {
         boxSizing: 'border-box',
         background: '#FAFAFA',
         boxSizing: 'border-box'
+    },
+    pageTitle: {
+        fontFamily: `${RootCss.fonts.mainFont}`,
+        color: `${RootCss.colors.pageTitleBlack}`,
+        fontWeight: '600',
+        fontSize: '20px',
+        padding: '0px 0px 20px 0px',
     },
 }
