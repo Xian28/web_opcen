@@ -1,5 +1,5 @@
 import { Box, InputAdornment } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { LandingPageCss } from './LandingPageCss'
 import ocdLogo from '../../assets/ocdlogo.png'
 import { StyledTextField } from '../../components/Styled/StyledTextField'
@@ -30,7 +30,6 @@ const LandingPage = () => {
         }
         setOpenSnackBar(false)
     }
-
     // for routing
     const navigate = useNavigate()
 

@@ -42,21 +42,18 @@ const Home = () => {
     }
 
     const selectMenu = (name,label) => {
-        var sideBarMenus = document.getElementsByClassName('sidebarMenus')
-        for(var i = 0; i < sideBarMenus.length; i++ ){
-            sideBarMenus[i].style.background = 'transparent'
-        }
+        // var sideBarMenus = document.getElementsByClassName('sidebarMenus')
+        // for(var i = 0; i < sideBarMenus.length; i++ ){
+        //     sideBarMenus[i].style.background = 'transparent'
+        // }
         
-        var selected = document.getElementById(name)
-        if(selected){
-            selected.style.background = `${RootCss.colors.secondaryColor}`
-        }
+        // var selected = document.getElementById(name)
+        // if(selected){
+        //     selected.style.background = `${RootCss.colors.secondaryColor}`
+        // }
 
-        if(name == 'dashboard'){
-            name = ''
-        }
         navigate('/' + name)
-        setPageTitle(label)
+        // setPageTitle(label)
     }
 
     const location = useLocation()
@@ -64,17 +61,21 @@ const Home = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        // alert('test' )
         const parsedTitle = location.pathname.split('/').pop().replace(/\W/g, ' ')
-        if(parsedTitle == '' || parsedTitle == 'home'){
-            setPageTitle('Dashboard')
+        if(parsedTitle == ''){
+            navigate('/dashboard')
         }
-        else if(parsedTitle == 'incident_reports'){
-            setPageTitle('Incident Reports')
+
+        var sideBarMenus = document.getElementsByClassName('sidebarMenus')
+        for(var i = 0; i < sideBarMenus.length; i++ ){
+            sideBarMenus[i].style.background = 'transparent'
         }
-        else{
-            setPageTitle(parsedTitle.charAt(0).toUpperCase() + parsedTitle.slice(1))
+        
+        var selected = document.getElementById(parsedTitle)
+        if(selected){
+            selected.style.background = `${RootCss.colors.secondaryColor}`
         }
+
     }, [location])
 
     return (
@@ -116,10 +117,14 @@ const Home = () => {
                     />
                 </Box>
                 <Box sx={HomeCss.contentContainer}>
-                    <Box sx={HomeCss.pageTitle}>
+                    {/* <Box sx={HomeCss.pageTitle}>
                         {pageTitle}
-                        {/* Page title goes here */}
-                    </Box>
+                    </Box> */}
+
+                    {/* removed the pagetitle 
+                    container and put it inside the 
+                    page containers */}
+
                     <Outlet />
                 </Box>
             </Box>

@@ -5,6 +5,7 @@
       "firstName": "Christian Leonell",
       "middleName": "Dicang",
       "lastName": "Torres",
+      "email": "cdtorres@gmail.com",
       "username": "cdtorres",
       "password": "password"
     },
@@ -13,7 +14,8 @@
       "firstName": "Juan",
       "middleName": "Abad",
       "lastName": "Dela Cruz",
-      "username": "abdelacruz",
+      "email": "jadelacruz@gmail.com",
+      "username": "jadelacruz",
       "password": "123456"
     }
   ]

@@ -94,11 +94,12 @@ export const HomeCss = {
         background: '#FAFAFA',
         boxSizing: 'border-box'
     },
-    pageTitle: {
-        fontFamily: `${RootCss.fonts.mainFont}`,
-        color: `${RootCss.colors.pageTitleBlack}`,
-        fontWeight: '600',
-        fontSize: '20px',
-        padding: '0px 0px 20px 0px',
-    },
+    // pageTitle: {
+    //     // border: 'solid 1px black',
+    //     fontFamily: `${RootCss.fonts.mainFont}`,
+    //     color: `${RootCss.colors.pageTitleBlack}`,
+    //     fontWeight: '600',
+    //     fontSize: '20px',
+    //     padding: '0px 0px 20px 0px',
+    // },
 }

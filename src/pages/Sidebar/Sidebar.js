@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import { SidebarCss } from './SidebarCss';
 
 const Sidebar = ({
@@ -22,6 +23,16 @@ const Sidebar = ({
             'name': 'users',
             'label': 'Users',
             'icon': <PeopleAltOutlinedIcon 
+                        sx={{
+                            color: 'white'
+                        }}
+                        fontSize='medium'
+                    />
+        },
+        {
+            'name': 'incident_reports',
+            'label': 'Incident Reports',
+            'icon': <LibraryBooksOutlinedIcon 
                         sx={{
                             color: 'white'
                         }}

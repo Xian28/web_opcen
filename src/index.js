@@ -21,7 +21,7 @@ root.render(
         {/* <Route index element = {<LandingPage />} /> */}
         <Route path = "/" exact element = {token == 'login' ? <Home /> : <LandingPage />} >
           <Route index element = {<Dashboard />} />
-          {/* <Route path = "dashboard" element = {<Dashboard />} /> */}
+          <Route path = "dashboard" element = {<Dashboard />} />
           <Route path = "users" element = {<Users />} />
           <Route path = "incident_reports" element = {<IncidentReport />} />
         </Route>
