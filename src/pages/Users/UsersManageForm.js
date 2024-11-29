@@ -4,14 +4,16 @@ import BasicModal from '../../components/BasicModal/BasicModal'
 import { StyledTextField } from '../../components/Styled/StyledTextField'
 import { PageCss } from '../PageCss/PageCss'
 import { RootCss } from '../../ui/RootCss'
+import { keyPress } from '../../functions/Keypress'
 import { inputValidation } from '../../functions/InputValidation'
 import { scrollIntoInvalidInput } from '../../functions/ScrollIntoInvalidInput'
-import { keyPress } from '../../functions/Keypress'
+import BasicSnackbar from '../../components/BasicSnackbar/BasicSnackbar'
 
-const UsersAddForm = ({
+const UsersManageForm = ({
     open,
     handleClose,
-    showusers
+    showUsers,
+    params
 }) => {
     // handling textfield errors
     const [userFirstNameInputErrorState, setUserFirstNameInputErrorState] = useState(false)
@@ -25,6 +27,18 @@ const UsersAddForm = ({
     const [userUsernameInputErrorState, setUserUsernameInputErrorState] = useState(false)
     const [userUsernameInputHelperTextState, setUserUsernameInputHelperTextState] = useState(' ')
 
+    // handling snackbar
+    const [visibility, setVisibility] = useState('false')
+    const [openSnackBar, setOpenSnackBar] = useState(false)
+    const [severity, setSeverity] = useState('')
+    const [snackBarMessage, setSnackBarMessage] = useState('')
+    const handleCloseSnackBar = (event, reason) => {
+        if(reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackBar(false);
+    }
+
     const modalBody = (
         <>
             <StyledTextField
@@ -37,7 +51,7 @@ const UsersAddForm = ({
                 placeholder="First Name"
                 name="userFirstName"
                 label="First Name"
-                defaultValue=''
+                defaultValue={params.firstName}
                 margin='none'
                 autoComplete="off"
                 inputProps={{
@@ -49,7 +63,7 @@ const UsersAddForm = ({
                     maxLength: 50
                 }}
                 onKeyDown={(event) => {
-                    keyPress(event,addUser)
+                    keyPress(event,editUser)
                 }}
             />
             <StyledTextField
@@ -62,7 +76,7 @@ const UsersAddForm = ({
                 placeholder="Middle Name"
                 name="userMiddleName"
                 label="Middle Name"
-                defaultValue=''
+                defaultValue={params.middleName}
                 margin='none'
                 autoComplete="off"
                 inputProps={{
@@ -74,7 +88,7 @@ const UsersAddForm = ({
                     maxLength: 50
                 }}
                 onKeyDown={(event) => {
-                    keyPress(event,addUser)
+                    keyPress(event,editUser)
                 }}
             />
             <StyledTextField
@@ -87,7 +101,7 @@ const UsersAddForm = ({
                 placeholder="Last Name"
                 name="userLastName"
                 label="Last Name"
-                defaultValue=''
+                defaultValue={params.lastName}
                 margin='none'
                 autoComplete="off"
                 inputProps={{
@@ -99,7 +113,7 @@ const UsersAddForm = ({
                     maxLength: 50
                 }}
                 onKeyDown={(event) => {
-                    keyPress(event,addUser)
+                    keyPress(event,editUser)
                 }}
             />
             <StyledTextField
@@ -112,7 +126,7 @@ const UsersAddForm = ({
                 placeholder="Email"
                 name="userEmail"
                 label="Email"
-                defaultValue=''
+                defaultValue={params.email}
                 margin='none'
                 autoComplete="off"
                 inputProps={{
@@ -124,7 +138,7 @@ const UsersAddForm = ({
                     maxLength: 50
                 }}
                 onKeyDown={(event) => {
-                    keyPress(event,addUser)
+                    keyPress(event,editUser)
                 }}
             />
             <StyledTextField
@@ -137,7 +151,7 @@ const UsersAddForm = ({
                 placeholder="Username"
                 name="userUsername"
                 label="Username"
-                defaultValue=''
+                defaultValue={params.username}
                 margin='none'
                 autoComplete="off"
                 inputProps={{
@@ -149,17 +163,17 @@ const UsersAddForm = ({
                     maxLength: 50
                 }}
                 onKeyDown={(event) => {
-                    keyPress(event,addUser)
+                    keyPress(event,editUser)
                 }}
             />
         </>
     )
 
-    // add button disable status
-    const [addButtonDisabled, setAddButtonDisabled] = useState(false)
+    // edit button disable status
+    const [editButtonDisabled, setEditButtonDisabled] = useState(false)
 
-    const addUser = () => {
-        if(addButtonDisabled){
+    const editUser = () => {
+        if(editButtonDisabled){
             return //this will end this function
         }
 
@@ -187,20 +201,6 @@ const UsersAddForm = ({
             )
             invalidInputCounter ++;
         }
-        
-        // if(inputValidation(
-        //     userMiddlenameInput.length == 0,
-        //         setUserMiddleNameInputErrorState,
-        //         setUserMiddleNameInputHelperTextState,
-        //         "Please enter the user's Middle Name"
-        //     ) == 'invalid'
-        // ){
-        //     mostTopInvalidInput = (
-        //         mostTopInvalidInput == '' ? 'userMiddlenameInput' :
-        //         mostTopInvalidInput
-        //     )
-        //     invalidInputCounter ++;
-        // }
 
         if(inputValidation(
             userLastnameInput.length == 0,
@@ -295,9 +295,22 @@ const UsersAddForm = ({
             document.getElementById(mostTopInvalidInput).focus()
         }
 
-
         if(invalidInputCounter == 0){
-            alert('will now add the user')
+            // checking if there is any field that has changed
+            if(
+                userFirstnameInput == params.firstName &&
+                userMiddlenameInput == params.middleName &&
+                userLastnameInput == params.lastName &&
+                userEmailInput == params.email &&
+                userUsernameInput == params.username
+            ){
+                setOpenSnackBar(true);
+                setSeverity('warning');
+                setSnackBarMessage('No details has changed.')
+            }
+            else{
+                alert('will now edit the user')
+            }
         }
     }
 
@@ -320,16 +333,23 @@ const UsersAddForm = ({
             <BasicModal
                 open={open}
                 handleClose={handleClose}
-                modalTitle='Add New User'
+                modalTitle='Edit User Details'
                 modalBody={modalBody}
-                buttonLabel='Add'
+                buttonLabel='Edit'
                 cancelButtonLabel='Cancel'
                 onClick={() => {
-                    addUser()
+                    editUser()
                 }}
+            />
+            <BasicSnackbar
+                open={openSnackBar}
+                severity={severity}
+                message={snackBarMessage}
+                onClose={handleCloseSnackBar}
+                fontSize='14px'
             />
         </Box>
     )
 }
 
-export default UsersAddForm
+export default UsersManageForm

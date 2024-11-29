@@ -5,13 +5,23 @@ import { RootCss } from '../../../../ui/RootCss'
 import BasicMenu from '../../../BasicMenu/BasicMenu'
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import { DynamicTablesCss } from '../DynamicTableCss'
+import UsersManageForm from '../../../../pages/Users/UsersManageForm'
 
 const UsersTable = ({
     showUsers,
     json
 }) => {
     // user details to pass to edit form
-    const [params, setparams] = useState([])
+    const [params, setParams] = useState([])
+
+    // manageUsers FormHandlers
+    const [openManageUser, setOpenManageUser] = useState(false)
+    const handleCloseManageUser = () => {
+        setOpenManageUser(false)
+    }
+    const openManageUserForm = () => {
+        setOpenManageUser(true)
+    }
 
     const userMenu = (params) => {
         return (
@@ -27,12 +37,12 @@ const UsersTable = ({
                 </Box> */}
                 <Box 
                     sx={DynamicTablesCss.menu}
-                    // onClick = {() => {
-                    //     openManageEmployeeForm()
-                    //     setParams(params.row)
-                    // }}
+                    onClick = {() => {
+                        openManageUserForm()
+                        setParams(params.row)
+                    }}
                 >
-                    Manage User Details
+                    Edit User Details
                 </Box>
                 {
                     // (Cookies.get().role == 3 || Cookies.get().role == 4) && (
@@ -208,6 +218,12 @@ const UsersTable = ({
                     fontSize: '12px',
                     fontFamily: `${RootCss.fonts.mainFont}`,
                 }}
+            />
+            <UsersManageForm
+                open={openManageUser}
+                handleClose={handleCloseManageUser}
+                showUsers={showUsers}
+                params={params}
             />
         </>
     )
