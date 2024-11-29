@@ -346,7 +346,6 @@ const UsersManageForm = ({
                 severity={severity}
                 message={snackBarMessage}
                 onClose={handleCloseSnackBar}
-                fontSize='14px'
             />
         </Box>
     )

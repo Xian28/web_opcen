@@ -47,4 +47,12 @@ export const PageCss = {
         // border: 'solid 1px black',
         padding: '20px 0px',
     },
+    modalNote: {
+        fontSize: '16px',
+        fontFamily: `${RootCss.fonts.mainFont}`,
+        // color: '#777',
+        // color: 'black',
+        color: `${RootCss.colors.textBlack}`,
+        padding: '0px 0px 20px 0px'
+    },
 }

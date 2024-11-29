@@ -6,6 +6,7 @@ import BasicMenu from '../../../BasicMenu/BasicMenu'
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import { DynamicTablesCss } from '../DynamicTableCss'
 import UsersManageForm from '../../../../pages/Users/UsersManageForm'
+import UserResetPassword from '../../../../pages/Users/UserResetPassword'
 
 const UsersTable = ({
     showUsers,
@@ -21,6 +22,15 @@ const UsersTable = ({
     }
     const openManageUserForm = () => {
         setOpenManageUser(true)
+    }
+
+    // reset password FormHandlers
+    const [openResetPassword, setOpenResetPassword] = useState(false)
+    const handleCloseResetPassword = () => {
+        setOpenResetPassword(false)
+    }
+    const openResetPasswordForm = () => {
+        setOpenResetPassword(true)
     }
 
     const userMenu = (params) => {
@@ -48,10 +58,10 @@ const UsersTable = ({
                     // (Cookies.get().role == 3 || Cookies.get().role == 4) && (
                         <Box 
                             sx={DynamicTablesCss.menu}
-                            // onClick = {() => {
-                            //     openResetPasswordForm()
-                            //     setParams(params.row)
-                            // }}
+                            onClick = {() => {
+                                openResetPasswordForm()
+                                setParams(params.row)
+                            }}
                         >
                             Reset Password
                         </Box>
@@ -224,6 +234,12 @@ const UsersTable = ({
                 handleClose={handleCloseManageUser}
                 showUsers={showUsers}
                 params={params}
+            />
+            <UserResetPassword
+                open={openResetPassword}
+                handleClose={handleCloseResetPassword}
+                showUsers={showUsers}
+                params = {params}
             />
         </>
     )
