@@ -43,7 +43,8 @@ const Users = () => {
                 'username': origJSON.username,
                 'fullname': (origJSON.lastName + ", " + 
                     origJSON.firstName + " " + 
-                    origJSON.middleName).toUpperCase()
+                    origJSON.middleName).toUpperCase(),
+                'status': origJSON.status
             }))
             setJson(customJSON)
         })

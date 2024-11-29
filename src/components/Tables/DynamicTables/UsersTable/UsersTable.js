@@ -7,6 +7,7 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import { DynamicTablesCss } from '../DynamicTableCss'
 import UsersManageForm from '../../../../pages/Users/UsersManageForm'
 import UserResetPassword from '../../../../pages/Users/UserResetPassword'
+import UsersChangeStatus from '../../../../pages/Users/UsersChangeStatus'
 
 const UsersTable = ({
     showUsers,
@@ -31,6 +32,15 @@ const UsersTable = ({
     }
     const openResetPasswordForm = () => {
         setOpenResetPassword(true)
+    }
+
+    // change user status
+    const [openChangeUserStatus, setOpenChangeUserStatus] = useState(false)
+    const handleCloseChangeUserStatus = () => {
+        setOpenChangeUserStatus(false)
+    }
+    const openChangeStatusForm = () => {
+        setOpenChangeUserStatus(true)
     }
 
     const userMenu = (params) => {
@@ -69,10 +79,10 @@ const UsersTable = ({
                 }
                 <Box 
                     sx={DynamicTablesCss.menu}
-                    // onClick = {() => {
-                    //     openSetAsInactiveForm()
-                    //     setParams(params.row)
-                    // }}
+                    onClick = {() => {
+                        openChangeStatusForm()
+                        setParams(params.row)
+                    }}
                 >
                     {label}
                 </Box>
@@ -190,7 +200,7 @@ const UsersTable = ({
                                         <MoreHorizOutlinedIcon 
                                             index={params.row.id}
                                             onClick = {() => {
-                                                setLabel(params.row.employee_status == 'ACTIVE' ? 'Set as Inactive' : 'Set as Active')
+                                                setLabel(params.row.status == 'Active' ? 'Change to Inactive' : 'Change to Active')
                                             }}
                                         />
                                     </>
@@ -238,6 +248,12 @@ const UsersTable = ({
             <UserResetPassword
                 open={openResetPassword}
                 handleClose={handleCloseResetPassword}
+                showUsers={showUsers}
+                params = {params}
+            />
+            <UsersChangeStatus
+                open={openChangeUserStatus}
+                handleClose={handleCloseChangeUserStatus}
                 showUsers={showUsers}
                 params = {params}
             />

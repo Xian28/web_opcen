@@ -7,7 +7,8 @@
       "lastName": "Torres",
       "email": "cdtorres@gmail.com",
       "username": "cdtorres",
-      "password": "password"
+      "password": "password",
+      "status": "Active"
     },
     {
       "id": "2",
@@ -16,7 +17,18 @@
       "lastName": "Dela Cruz",
       "email": "jadelacruz@gmail.com",
       "username": "jadelacruz",
-      "password": "123456"
+      "password": "123456",
+      "status": "Active"
+    },
+    {
+      "id": "3",
+      "firstName": "Johnny",
+      "middleName": "",
+      "lastName": "Sins",
+      "email": "jsins@gmail.com",
+      "username": "jsins",
+      "password": "123456",
+      "status": "Inactive"
     }
   ]
 }
