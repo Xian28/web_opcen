@@ -38,7 +38,17 @@ const Sidebar = ({
                         }}
                         fontSize='medium'
                     />
-        }
+        },
+        {
+            'name': 'situational_reports',
+            'label': 'Situational Reports',
+            'icon': <LibraryBooksOutlinedIcon 
+                        sx={{
+                            color: 'white'
+                        }}
+                        fontSize='medium'
+                    />
+        },
     ]
     return (
         <>

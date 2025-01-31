@@ -94,6 +94,10 @@ export const HomeCss = {
         background: '#FAFAFA',
         boxSizing: 'border-box'
     },
+    avatarMenuContainer: {
+        minWidth: '200px',
+        // padding: '10px'
+    },
     // pageTitle: {
     //     // border: 'solid 1px black',
     //     fontFamily: `${RootCss.fonts.mainFont}`,

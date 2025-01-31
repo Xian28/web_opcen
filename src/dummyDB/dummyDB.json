@@ -18,17 +18,17 @@
       "email": "jadelacruz@gmail.com",
       "username": "jadelacruz",
       "password": "123456",
-      "status": "Active"
+      "status": "Inactive"
     },
     {
       "id": "3",
-      "firstName": "Johnny",
-      "middleName": "",
-      "lastName": "Sins",
-      "email": "jsins@gmail.com",
-      "username": "jsins",
+      "firstName": "Raymon",
+      "middleName": "Imente",
+      "lastName": "Dumalagan",
+      "email": "ridumalagan@gmail.com",
+      "username": "rdumalagan",
       "password": "123456",
-      "status": "Inactive"
+      "status": "Active"
     }
   ]
 }

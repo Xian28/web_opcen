@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Avatar, Box, Tooltip, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { HomeCss } from './HomeCss'
 import MenuIcon from '@mui/icons-material/Menu';
@@ -8,6 +8,7 @@ import BasicSnackbar from '../../components/BasicSnackbar/BasicSnackbar';
 import Loader from '../../components/Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
 import { RootCss } from '../../ui/RootCss';
+import BasicMenu from '../../components/BasicMenu/BasicMenu';
 
 const Home = () => {
     // snackbar components
@@ -104,7 +105,20 @@ const Home = () => {
                     </Typography>
                 </Box>
                 <Box sx={HomeCss.subHeaderContainer}>
-                        
+                    <BasicMenu
+                        button = {
+                            <>
+                                {/* <Tooltip title={employeeName}> */}
+                                <Tooltip title='Name goes here'> 
+                                    <Avatar
+                                        // alt={employeeName}
+                                        alt='Alt name goes here'
+                                        sx={HomeCss.avatar}
+                                    />
+                                </Tooltip>
+                            </>
+                        }
+                    />
                 </Box>
             </Box>
             <Box sx={HomeCss.bodyContainer}>
@@ -137,7 +151,6 @@ const Home = () => {
                 severity={severity}
                 message={snackbarMessage}
                 onClose={handleCloseSnackbar}
-                fontSize='14px'
             />
             {
                 visibility ? (
