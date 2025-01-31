@@ -98,6 +98,26 @@ export const HomeCss = {
         minWidth: '200px',
         // padding: '10px'
     },
+    avatarMenu: {
+        padding: '5px 10px',
+        cursor: 'pointer',
+        fontSize: '14px',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        minWidth: '150px',
+        transition: '0.2s',
+        '&:hover': {
+            background: '#eee'
+        }
+    },
+    avatar: {
+        background: `${RootCss.colors.primaryColor}`,
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        '&:hover' : {
+            background: `${RootCss.colors.primaryColorHover}`,
+        }
+    },
     // pageTitle: {
     //     // border: 'solid 1px black',
     //     fontFamily: `${RootCss.fonts.mainFont}`,

@@ -9,6 +9,7 @@ import Loader from '../../components/Loader/Loader';
 import Sidebar from '../Sidebar/Sidebar';
 import { RootCss } from '../../ui/RootCss';
 import BasicMenu from '../../components/BasicMenu/BasicMenu';
+import HomeMenu from './HomeMenu';
 
 const Home = () => {
     // snackbar components
@@ -117,6 +118,11 @@ const Home = () => {
                                     />
                                 </Tooltip>
                             </>
+                        }
+                        menu = {
+                            <HomeMenu
+
+                            />
                         }
                     />
                 </Box>

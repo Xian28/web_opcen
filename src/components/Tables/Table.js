@@ -19,6 +19,7 @@ const Table = ({
             columns={columns}
             loading={loading}
             disableSelectionOnClick={true}
+            disableRowSelectionOnClick={true}
             pageSize={customPageSize ? customPageSize : pageSize}
             pagination
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
